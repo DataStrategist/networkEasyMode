@@ -7,12 +7,14 @@
 ## network3d, change the indexing to 0
 
 easyMode <- function(df,Index=1){
+  df <- as.data.frame(df)
   nodes <- data.frame(name=df[,1:2] %>% unlist %>% as.character() %>% unique())
   nodes[,1] <- as.character(nodes[,1])
+  nodes$id <- row_number(nodes)
   
   ## and match to IDs to make edges
-  edges <- data.frame(from= match(df[,1],nodes$name),
-                      to=   match(df[,2],nodes$name),
+  edges <- data.frame(from= match(as.character(df[,1]),nodes$name),
+                      to=   match(as.character(df[,2]),nodes$name),
                       value=df[,3])
   
   ## indexing

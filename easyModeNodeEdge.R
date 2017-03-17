@@ -8,6 +8,10 @@
 
 easyMode <- function(df,Index=1){
   df <- as.data.frame(df)
+  
+  ## Add a value column if there is none
+  if (ncol(df)==2){df$value=1}
+  
   nodes <- data.frame(name=df[,1:2] %>% unlist %>% as.character() %>% unique())
   nodes[,1] <- as.character(nodes[,1])
   nodes$id <- 1:nrow(nodes)
